@@ -139,9 +139,12 @@ class XenforoBridge
      */
     protected function bootstrapXenforo($directoryPath)
     {
-        XenForo_Autoloader::getInstance()->setupAutoloader($directoryPath .'/library');
+	\XF::start($directoryPath);
+        $app = \XF::setupApp('XF\Pub\App');
+        $app->start();
+        /*XenForo_Autoloader::getInstance()->setupAutoloader($directoryPath .'/library');
         XenForo_Application::initialize($directoryPath . '/library', $directoryPath);
-        XenForo_Session::startPublicSession();
+        XenForo_Session::startPublicSession();*/
     }
 
     /**
@@ -154,7 +157,7 @@ class XenforoBridge
     {
         if(!$this->xenforoOptions instanceof XenForo_Options)
         {
-            $this->xenforoOptions = XenForo_Application::get('options');
+            $this->xenforoOptions = \XF::options();
         }
         return $this->xenforoOptions;
     }
@@ -186,7 +189,7 @@ class XenforoBridge
 
 		if(!$autoloader)
 		{
-			throw new XenforoAutoloaderException('Could not load XenForo_Autoloader.php check path');
+			throw new XenforoAutoloaderException('Could not load XF.php check path');
 		}
 	}
 
