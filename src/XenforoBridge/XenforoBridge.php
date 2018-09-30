@@ -180,7 +180,7 @@ class XenforoBridge
      */
 	protected function loadXenAutoloader($xenforoDirectory)
 	{
-		$path = $xenforoDirectory. '/library/XenForo/Autoloader.php';
+		$path = $xenforoDirectory. '/src/XF.php';
 
 		$autoloader = include_once($path);
 
